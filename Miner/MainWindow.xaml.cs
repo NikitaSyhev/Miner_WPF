@@ -24,7 +24,7 @@ namespace Miner
         {
             InitializeComponent();
             InitBoard();
-            SetMineLocation(10);
+            SetMineLocation(4);
             //ImageSource imageSource =
             //    new BitmapImage(new Uri("Bomb.jpg", UriKind.Relative));
             //cell_img.image.Source = imageSource;
