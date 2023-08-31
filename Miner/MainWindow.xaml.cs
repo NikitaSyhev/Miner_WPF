@@ -20,6 +20,10 @@ namespace Miner
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        
+        
+
         public MainWindow()
         {
             InitializeComponent();
@@ -62,6 +66,8 @@ namespace Miner
             //cells[4].changeText("Bomb");
 
         }
+        
+        
 
         private void Button_Click02(object sender, RoutedEventArgs e)
         {
@@ -69,6 +75,7 @@ namespace Miner
             {
                 item.button.Content = item.reverse;
                 item.MyButton_Click(sender, e);
+                
             }
         }
 

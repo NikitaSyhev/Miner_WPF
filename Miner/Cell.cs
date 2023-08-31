@@ -68,6 +68,7 @@ namespace Miner
                     break;
                 case "B":
                     this.myButton.Background = Brushes.IndianRed;
+                    MessageBox.Show("You LOST");
                     break;
                 default:
                     break;
