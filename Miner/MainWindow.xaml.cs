@@ -21,23 +21,28 @@ namespace Miner
     public partial class MainWindow : Window
     {
 
-        
-        
+        private List<Cell> cells = new List<Cell>(64);
+        TextBox Score = new TextBox();
+        Grid myGrid = new Grid();
+        Button buttonExit = new Button();
+        Button label  = new Button();
+        int score = Cell.ButtonClick;
+
+
 
         public MainWindow()
         {
             InitializeComponent();
             InitBoard();
             SetMineLocation(4);
-            //ImageSource imageSource =
-            //    new BitmapImage(new Uri("Bomb.jpg", UriKind.Relative));
-            //cell_img.image.Source = imageSource;
+            addMenu();
 
         }
-        private List<Cell> cells = new List<Cell>(64);
+       
+    
         private void InitBoard()
         {
-            var myGrid = new Grid();
+            
             this.AddChild(myGrid);
             myGrid.ShowGridLines = true;
             for (int i = 0; i < 9; i++)
@@ -53,21 +58,45 @@ namespace Miner
                 
                 myGrid.Children.Add(cell.button);
                 Grid.SetColumn(cell.button, cell.X);
-                Grid.SetRow(cell.button, cell.Y);
+                Grid.SetRow(cell.button, cell.Y+1);
 
             }
-            // Добавление кнопки в правый нижний угол
-            var cell_99 = new Cell("cell_99", 9, 9);
-            myGrid.Children.Add(cell_99.button);
-            Grid.SetColumn(cell_99.button, cell_99.X);
-            Grid.SetRow(cell_99.button, cell_99.Y);
-            cell_99.button.Click += Button_Click02;
+         }
 
-            //cells[4].changeText("Bomb");
+        private void addMenu()
+        {
+            Score = new TextBox();
+            Score.Width = 70;
+            Score.Text = String.Empty;
+
+            Score.FontSize = 25;
+           
+            myGrid.Children.Add(Score);
+            Grid.SetColumn(Score, 1);
+            Grid.SetRow(Score, 0);
+
+            buttonExit = new Button();
+            buttonExit.Content = "EXIT";
+            myGrid.Children.Add(buttonExit);
+            Grid.SetColumn(buttonExit, 1);
+            Grid.SetColumn(buttonExit, 2);
+            buttonExit.Click += ButtonExit_Click;
+            label = new Button();
+            label.Content = "Score";
+            myGrid.Children.Add(label);
+            Grid.SetColumn(label, 0);
+            Grid.SetRow(label,0);
 
         }
-        
-        
+
+       
+
+        private void ButtonExit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+      
 
         private void Button_Click02(object sender, RoutedEventArgs e)
         {
@@ -75,10 +104,13 @@ namespace Miner
             {
                 item.button.Content = item.reverse;
                 item.MyButton_Click(sender, e);
-                
+                Score.Text = score.ToString();
+
             }
         }
-
+        
+      
+      
         private void SetMineLocation(int _number)
         {
             Random random = new Random(DateTimeOffset.Now.Second);
@@ -95,7 +127,7 @@ namespace Miner
                 }
                 
             }
-            //cells[56].setBomb();
+           
         }
         private void modifyCountOfMineArround(int _number)
         {

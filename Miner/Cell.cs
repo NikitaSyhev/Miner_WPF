@@ -11,9 +11,11 @@ using System.Runtime.Remoting.Contexts;
 
 namespace Miner
 {
-    internal class Cell
+    public  class Cell
     {
         private Button myButton;
+        private static int buttonClick = 0;
+        public  static int ButtonClick { get { return buttonClick; } }
         public Button button { get { return myButton;} }
         private string Name;
         public string name { get { return Name; } }
@@ -46,6 +48,18 @@ namespace Miner
             this.Reverse = _reverse;
         }
 
+        private void countUnlockedCells()
+        {
+            buttonClick++;
+        }
+        private void gameWin()
+        {
+            if(buttonClick == 60)
+            {
+                MessageBox.Show("Congratulation. You WIN!");
+            }
+        }
+
         public void MyButton_Click(object sender, RoutedEventArgs e)
         {
             this.myButton.Content = this.Reverse;
@@ -53,24 +67,33 @@ namespace Miner
             {
                 case "1":
                     this.myButton.Background = Brushes.LightGreen;
+                    countUnlockedCells();
+                    
+
+                    gameWin();
                     break;
                 case "2":
                     this.myButton.Background = Brushes.LightPink;
+                    countUnlockedCells();
+                    gameWin();
                     break;
                 case "3":
                     this.myButton.Background = Brushes.LightSkyBlue;
+                    countUnlockedCells();
+                    gameWin();
                     break;
                 case "4":
                     this.myButton.Background = Brushes.LightYellow;
-                    break;
-                case "5":
-                    this.myButton.Background = Brushes.LightSlateGray;
+                    countUnlockedCells();
+                    gameWin();
                     break;
                 case "B":
                     this.myButton.Background = Brushes.IndianRed;
-                    MessageBox.Show("You LOST");
+                    MessageBox.Show("Sorry!You LOST");
                     break;
                 default:
+                    countUnlockedCells();
+                    gameWin();
                     break;
             }
             
